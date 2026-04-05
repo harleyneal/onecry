@@ -29,7 +29,7 @@ export default function ParticleSymbol({
   const timerRef = useRef(0);
 
   // Phase durations (seconds)
-  const HOLD_FORMED = 5.0; // particles sit as the hand shape
+  const HOLD_FORMED = 2.5; // particles sit as the hand shape
   const SCATTER = 3.5; // particles break apart outward
   const HOLD_SCATTERED = 3.0; // particles swirl freely
   const REFORM = 3.5; // particles spiral back into hand shape
