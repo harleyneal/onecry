@@ -60,9 +60,7 @@ function Hero() {
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-teal-light/40 via-white to-teal-light/20" />
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.08] pointer-events-none">
-        <ParticleSymbol width={600} height={600} />
-      </div>
+      <ParticleSymbol className="absolute inset-0 w-full h-full opacity-[0.10] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <div className="mb-8">
@@ -83,18 +81,12 @@ function Hero() {
           Uniting churches across Pensacola for 24/7/365 prayer — so that at
           every hour, someone is interceding for our city and its people.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex items-center justify-center">
           <a
             href="#join"
             className="px-8 py-4 bg-teal text-white text-lg font-medium rounded-full hover:bg-teal-medium transition-all hover:shadow-lg hover:shadow-teal/20"
           >
             Commit Your Church
-          </a>
-          <a
-            href="#mission"
-            className="px-8 py-4 text-teal-dark/70 text-lg font-medium hover:text-teal-dark transition-colors"
-          >
-            Learn More &darr;
           </a>
         </div>
       </div>

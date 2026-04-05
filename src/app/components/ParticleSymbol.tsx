@@ -7,174 +7,201 @@ interface Particle {
   homeY: number;
   x: number;
   y: number;
-  vx: number;
-  vy: number;
+  angle: number; // unique scatter angle
+  dist: number; // unique scatter distance
+  swirl: number; // swirl offset for organic motion
   size: number;
   alpha: number;
 }
 
 export default function ParticleSymbol({
-  width = 600,
-  height = 600,
   className = "",
 }: {
-  width?: number;
-  height?: number;
   className?: string;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
-  const phaseRef = useRef(0);
   const timerRef = useRef(0);
   const animFrameRef = useRef<number>(0);
+  const sizeRef = useRef({ w: 0, h: 0 });
 
-  const SCATTER_DURATION = 3.0;
-  const HOLD_SCATTERED = 1.5;
-  const GATHER_DURATION = 3.0;
-  const HOLD_GATHERED = 4.0;
+  const SCATTER_DURATION = 4.0;
+  const HOLD_SCATTERED = 2.0;
+  const GATHER_DURATION = 4.0;
+  const HOLD_GATHERED = 5.0;
   const TOTAL_CYCLE =
     SCATTER_DURATION + HOLD_SCATTERED + GATHER_DURATION + HOLD_GATHERED;
 
-  const initParticles = useCallback(
-    (canvas: HTMLCanvasElement) => {
-      // Draw the SVG symbol to an offscreen canvas to sample pixels
-      const offscreen = document.createElement("canvas");
-      offscreen.width = canvas.width;
-      offscreen.height = canvas.height;
-      const offCtx = offscreen.getContext("2d")!;
+  const initParticles = useCallback((canvas: HTMLCanvasElement) => {
+    const dpr = window.devicePixelRatio || 1;
+    const logicalW = canvas.clientWidth;
+    const logicalH = canvas.clientHeight;
 
-      const img = new window.Image();
-      img.onload = () => {
-        // Center the symbol in the canvas
-        const scale = Math.min(
-          (canvas.width * 0.6) / img.naturalWidth,
-          (canvas.height * 0.6) / img.naturalHeight
-        );
-        const w = img.naturalWidth * scale;
-        const h = img.naturalHeight * scale;
-        const ox = (canvas.width - w) / 2;
-        const oy = (canvas.height - h) / 2;
+    sizeRef.current = { w: logicalW, h: logicalH };
+    canvas.width = logicalW * dpr;
+    canvas.height = logicalH * dpr;
 
-        offCtx.drawImage(img, ox, oy, w, h);
-        const imageData = offCtx.getImageData(
-          0,
-          0,
-          canvas.width,
-          canvas.height
-        );
-        const pixels = imageData.data;
+    const offscreen = document.createElement("canvas");
+    offscreen.width = canvas.width;
+    offscreen.height = canvas.height;
+    const offCtx = offscreen.getContext("2d")!;
 
-        const particles: Particle[] = [];
-        const step = 4; // sample every 4th pixel for performance
+    const img = new window.Image();
+    img.onload = () => {
+      // Draw the symbol centered, at about 45% of the canvas height
+      const symbolH = logicalH * dpr * 0.45;
+      const symbolW =
+        (img.naturalWidth / img.naturalHeight) * symbolH;
+      const ox = (canvas.width - symbolW) / 2;
+      const oy = (canvas.height - symbolH) / 2;
 
-        for (let y = 0; y < canvas.height; y += step) {
-          for (let x = 0; x < canvas.width; x += step) {
-            const i = (y * canvas.width + x) * 4;
-            const a = pixels[i + 3];
-            if (a > 30) {
-              particles.push({
-                homeX: x,
-                homeY: y,
-                x: x,
-                y: y,
-                vx: 0,
-                vy: 0,
-                size: 1.5 + Math.random() * 1.5,
-                alpha: 0.6 + Math.random() * 0.4,
-              });
-            }
+      offCtx.drawImage(img, ox, oy, symbolW, symbolH);
+      const imageData = offCtx.getImageData(0, 0, canvas.width, canvas.height);
+      const pixels = imageData.data;
+
+      const particles: Particle[] = [];
+      // Sample density based on canvas size — target ~2500-4000 particles
+      const area = canvas.width * canvas.height;
+      const step = Math.max(3, Math.round(Math.sqrt(area / 3500)));
+
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+
+      for (let y = 0; y < canvas.height; y += step) {
+        for (let x = 0; x < canvas.width; x += step) {
+          const i = (y * canvas.width + x) * 4;
+          if (pixels[i + 3] > 30) {
+            // Pre-compute a unique scatter direction per particle
+            const baseAngle = Math.atan2(y - cy, x - cx);
+            const angle = baseAngle + (Math.random() - 0.5) * 1.2;
+            const dist = 100 + Math.random() * 200;
+
+            particles.push({
+              homeX: x / dpr,
+              homeY: y / dpr,
+              x: x / dpr,
+              y: y / dpr,
+              angle,
+              dist,
+              swirl: Math.random() * Math.PI * 2,
+              size: 1.2 + Math.random() * 1.8,
+              alpha: 0.5 + Math.random() * 0.5,
+            });
           }
         }
+      }
 
-        particlesRef.current = particles;
-      };
-      img.src = "/assets/symbol.svg";
-    },
-    []
-  );
+      particlesRef.current = particles;
+    };
+    img.src = "/assets/symbol.svg";
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-
-    const ctx = canvas.getContext("2d")!;
-    ctx.scale(dpr, dpr);
-
     initParticles(canvas);
 
+    // Handle resize
+    const onResize = () => {
+      initParticles(canvas);
+    };
+    window.addEventListener("resize", onResize);
+
+    const ctx = canvas.getContext("2d")!;
     let lastTime = performance.now();
+
+    const ease = (v: number) => v * v * (3 - 2 * v);
 
     const animate = (now: number) => {
       const dt = Math.min((now - lastTime) / 1000, 0.05);
       lastTime = now;
       timerRef.current += dt;
 
+      const { w, h } = sizeRef.current;
+      const dpr = window.devicePixelRatio || 1;
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+
       const cycleTime = timerRef.current % TOTAL_CYCLE;
 
-      // Determine phase: 0=scattering, 1=holding scattered, 2=gathering, 3=holding gathered
-      let t = 0;
+      let phase: number;
+      let t: number;
       if (cycleTime < SCATTER_DURATION) {
-        phaseRef.current = 0;
+        phase = 0;
         t = cycleTime / SCATTER_DURATION;
       } else if (cycleTime < SCATTER_DURATION + HOLD_SCATTERED) {
-        phaseRef.current = 1;
+        phase = 1;
         t = 1;
       } else if (
         cycleTime <
         SCATTER_DURATION + HOLD_SCATTERED + GATHER_DURATION
       ) {
-        phaseRef.current = 2;
-        t =
-          (cycleTime - SCATTER_DURATION - HOLD_SCATTERED) / GATHER_DURATION;
+        phase = 2;
+        t = (cycleTime - SCATTER_DURATION - HOLD_SCATTERED) / GATHER_DURATION;
       } else {
-        phaseRef.current = 3;
+        phase = 3;
         t = 0;
       }
 
-      // Easing
-      const ease = (v: number) => v * v * (3 - 2 * v); // smoothstep
-
-      ctx.clearRect(0, 0, width, height);
-
+      const nowSec = now / 1000;
       const particles = particlesRef.current;
+
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        const phase = phaseRef.current;
 
         if (phase === 0) {
-          // Scattering: move away from home
-          const angle =
-            Math.atan2(p.homeY - height / 2, p.homeX - width / 2) +
-            (Math.random() - 0.5) * 0.1;
-          const dist = 80 + Math.random() * 120;
-          const targetX = p.homeX + Math.cos(angle) * dist * ease(t);
-          const targetY = p.homeY + Math.sin(angle) * dist * ease(t);
-          p.x += (targetX - p.x) * 0.08;
-          p.y += (targetY - p.y) * 0.08;
-        } else if (phase === 1) {
-          // Hold scattered: gentle drift
-          p.x += Math.sin(now * 0.001 + i) * 0.15;
-          p.y += Math.cos(now * 0.001 + i * 0.7) * 0.15;
-        } else if (phase === 2) {
-          // Gathering: return home
+          // Scattering outward with swirl
           const progress = ease(t);
-          p.x += (p.homeX - p.x) * (0.02 + progress * 0.1);
-          p.y += (p.homeY - p.y) * (0.02 + progress * 0.1);
+          const swirlAngle =
+            p.angle + Math.sin(nowSec * 0.8 + p.swirl) * 0.5 * progress;
+          const targetX =
+            p.homeX + Math.cos(swirlAngle) * p.dist * progress;
+          const targetY =
+            p.homeY + Math.sin(swirlAngle) * p.dist * progress;
+          p.x += (targetX - p.x) * 0.06;
+          p.y += (targetY - p.y) * 0.06;
+        } else if (phase === 1) {
+          // Drifting scattered — organic swirl
+          const swirlX =
+            Math.sin(nowSec * 0.6 + p.swirl) * 1.2 +
+            Math.sin(nowSec * 0.3 + i * 0.01) * 0.8;
+          const swirlY =
+            Math.cos(nowSec * 0.5 + p.swirl * 1.3) * 1.2 +
+            Math.cos(nowSec * 0.25 + i * 0.01) * 0.8;
+          p.x += swirlX * 0.4;
+          p.y += swirlY * 0.4;
+        } else if (phase === 2) {
+          // Gathering back — swirl inward
+          const progress = ease(t);
+          const remaining = 1 - progress;
+          // Add a gentle spiral as they return
+          const spiralAngle =
+            Math.sin(nowSec * 1.2 + p.swirl) * 0.3 * remaining;
+          const targetX = p.homeX + Math.cos(spiralAngle) * 5 * remaining;
+          const targetY = p.homeY + Math.sin(spiralAngle) * 5 * remaining;
+          const speed = 0.03 + progress * 0.12;
+          p.x += (targetX - p.x) * speed;
+          p.y += (targetY - p.y) * speed;
         } else {
-          // Hold gathered: very subtle pulse
-          p.x += (p.homeX - p.x) * 0.15;
-          p.y += (p.homeY - p.y) * 0.15;
+          // Holding formed — subtle breathing
+          const breath = Math.sin(nowSec * 1.5 + p.swirl) * 0.3;
+          p.x += (p.homeX - p.x) * 0.12 + breath * 0.1;
+          p.y += (p.homeY - p.y) * 0.12 + breath * 0.08;
         }
 
-        // Draw particle
-        const distFromHome = Math.hypot(p.x - p.homeX, p.y - p.homeY);
-        const alphaMultiplier = phase === 1 ? 0.5 : phase === 0 ? 1 - ease(t) * 0.5 : phase === 2 ? 0.5 + ease(t) * 0.5 : 1;
+        // Alpha: full when gathered, softer when scattered
+        let alphaMultiplier: number;
+        if (phase === 0) {
+          alphaMultiplier = 1 - ease(t) * 0.4;
+        } else if (phase === 1) {
+          alphaMultiplier = 0.6;
+        } else if (phase === 2) {
+          alphaMultiplier = 0.6 + ease(t) * 0.4;
+        } else {
+          alphaMultiplier = 1;
+        }
 
         ctx.globalAlpha = p.alpha * alphaMultiplier;
         ctx.fillStyle = "rgb(116, 205, 216)";
@@ -190,15 +217,15 @@ export default function ParticleSymbol({
     animFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
+      window.removeEventListener("resize", onResize);
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
-  }, [width, height, initParticles, SCATTER_DURATION, HOLD_SCATTERED, GATHER_DURATION, HOLD_GATHERED, TOTAL_CYCLE]);
+  }, [initParticles, SCATTER_DURATION, HOLD_SCATTERED, GATHER_DURATION, HOLD_GATHERED, TOTAL_CYCLE]);
 
   return (
     <canvas
       ref={canvasRef}
       className={className}
-      style={{ width, height }}
       aria-hidden="true"
     />
   );
