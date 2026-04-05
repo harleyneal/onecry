@@ -69,11 +69,11 @@ function Hero() {
             alt="OneCry flame"
             width={80}
             height={120}
-            className="mx-auto h-20 w-auto mb-6"
+            className="mx-auto h-32 w-auto mb-6"
           />
         </div>
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-teal-dark mb-6 leading-[1.1]">
-          One City.
+          One Body.
           <br />
           <span className="text-teal">One Cry.</span>
         </h1>
@@ -249,43 +249,31 @@ function BlessingIcon({ type }: { type: string }) {
   const cls = "w-10 h-10 text-teal";
   switch (type) {
     case "peace":
+      // Classic dove of peace silhouette
       return (
-        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M16 7c.5-1.5 1.5-3 3-3 2 0 3 1.5 3 3.5 0 3.5-6 7.5-10 11C8 15 2 11 2 7.5 2 5.5 3 4 5 4c1.5 0 2.5 1.5 3 3" />
-          <path d="M8 7c1-2 2.5-4 4-4s3 2 4 4" />
-          <path d="M9 18l-1.5 2" />
-          <path d="M15 18l1.5 2" />
-          <path d="M12 12c0-2-1-4-1-4" />
-          <path d="M12 12c0-2 1-4 1-4" />
-          <path d="M12 12v6" />
+        <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.5 2C10.5 2 9 3.2 9 5c0 .8.3 1.5.7 2L3 13.5c-.4.4-.5 1-.2 1.5s.9.7 1.4.5l3.3-1.3L6 17.5c-.2.5 0 1.1.4 1.4.3.2.6.3.9.3.2 0 .4 0 .5-.1l4.2-2.1 2 2c.3.3.7.4 1 .3.4-.1.7-.4.8-.8l.7-3.5 2.8 1c.1 0 .3.1.4.1.4 0 .7-.2.9-.5.3-.4.2-1-.1-1.3L17 11c.6-.8 1-1.8 1-2.8 0-.4 0-.7-.1-1.1l2.6-1.6c.5-.3.7-.9.5-1.4-.2-.5-.8-.8-1.3-.6l-2.8 1C15.8 3 14.3 2 12.5 2zm0 2c1.1 0 2 .7 2.3 1.7L12 7.5l-1-.6c-.3-.5-.5-1.2-.5-1.9 0-1 .9-1 2-1z" />
         </svg>
       );
     case "health":
+      // Solid filled heart
       return (
-        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3.332.83-4.5 2.17C10.832 3.83 9.26 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+        <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
         </svg>
       );
     case "provision":
+      // Solid open hands / offering
       return (
-        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 11V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v5" />
-          <path d="M12 4v7" />
-          <path d="M4 15a2 2 0 0 0 2 2h1l1.5 3.5L12 17l3.5 3.5L17 17h1a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2Z" />
+        <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z" />
         </svg>
       );
     case "transformation":
+      // Solid sun/radiance
       return (
-        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2v4" />
-          <path d="m6.34 6.34 2.83 2.83" />
-          <path d="M2 12h4" />
-          <path d="m14.83 9.17 2.83-2.83" />
-          <path d="M18 12h4" />
-          <path d="m6.34 17.66 2.83-2.83" />
-          <path d="M12 18v4" />
-          <path d="m14.83 14.83 2.83 2.83" />
-          <circle cx="12" cy="12" r="3" />
+        <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5l-1 3h2l-1-3zm0 20l1-3h-2l1 3zM5.64 5.64l2.12 2.12 1.06-1.06-2.12-2.12-1.06 1.06zM17.3 17.3l-2.12-2.12-1.06 1.06 2.12 2.12 1.06-1.06zM2 12l3 1v-2l-3 1zm20 0l-3-1v2l3-1zM5.64 18.36l1.06-1.06-2.12-2.12-1.06 1.06 2.12 2.12zM18.36 5.64l-1.06 1.06 2.12 2.12 1.06-1.06-2.12-2.12z" />
         </svg>
       );
     default:
