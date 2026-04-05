@@ -152,7 +152,7 @@ function HowItWorks() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-20">
           <p className="text-teal font-semibold text-sm uppercase tracking-widest mb-4">
-            The Vision
+            How It Works
           </p>
           <h2 className="text-3xl md:text-5xl font-bold text-teal-dark leading-tight">
             The Vision
@@ -333,9 +333,6 @@ function Blessings() {
               key={b.title}
               className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="mb-5">
-                <BlessingIcon type={b.iconType} />
-              </div>
               <h3 className="text-xl font-bold text-teal-dark mb-3">
                 {b.title}
               </h3>
