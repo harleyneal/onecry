@@ -60,7 +60,7 @@ function Hero() {
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-teal-light/40 via-white to-teal-light/20" />
 
-      <ParticleSymbol className="absolute inset-0 w-full h-full opacity-[0.10] pointer-events-none" />
+      <ParticleSymbol className="absolute inset-0 w-full h-full opacity-[0.25] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <div className="mb-8">
@@ -245,28 +245,75 @@ function WhyWePray() {
   );
 }
 
+function BlessingIcon({ type }: { type: string }) {
+  const cls = "w-10 h-10 text-teal";
+  switch (type) {
+    case "peace":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9Z" />
+          <path d="M12 3v18" />
+          <path d="m12 12-6.5 6.5" />
+          <path d="m12 12 6.5 6.5" />
+        </svg>
+      );
+    case "health":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22c-4-3-8-6.58-8-10.5a5.5 5.5 0 0 1 11 0 5.5 5.5 0 0 1 11 0c0 3.92-4 7.5-8 10.5Z" />
+          <path d="M12 11v4" />
+          <path d="M10 13h4" />
+        </svg>
+      );
+    case "provision":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M18 11V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v5" />
+          <path d="M12 4v7" />
+          <path d="M4 15a2 2 0 0 0 2 2h1l1.5 3.5L12 17l3.5 3.5L17 17h1a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2Z" />
+        </svg>
+      );
+    case "transformation":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2v4" />
+          <path d="m6.34 6.34 2.83 2.83" />
+          <path d="M2 12h4" />
+          <path d="m14.83 9.17 2.83-2.83" />
+          <path d="M18 12h4" />
+          <path d="m6.34 17.66 2.83-2.83" />
+          <path d="M12 18v4" />
+          <path d="m14.83 14.83 2.83 2.83" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 function Blessings() {
   const blessings = [
     {
-      icon: "\u{1F54A}",
+      iconType: "peace",
       title: "Peace",
       description:
         "In our schools, in our homes, for those in authority to have wisdom and to lead with gentle authority \u2014 for Pensacola to become known as a city of Peace.",
     },
     {
-      icon: "\u{1F33F}",
+      iconType: "health",
       title: "Prosperity & Health",
       description:
         "By renewing minds, protecting hearts, and for the souls of each man, woman, and child to be restored to God \u2014 for sturdy marriages and family fullness.",
     },
     {
-      icon: "\u{1F932}",
+      iconType: "provision",
       title: "Provision",
       description:
         "From God to provide for daily needs, protection from harm, ample jobs, and freedom from cycles of sin.",
     },
     {
-      icon: "\u{2728}",
+      iconType: "transformation",
       title: "Transformation",
       description:
         "Of our entire community for God\u2019s glory \u2014 for strong and vibrant church communities flourishing with Kingdom purposes.",
@@ -295,13 +342,9 @@ function Blessings() {
               key={b.title}
               className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
             >
-              <span
-                className="text-3xl mb-4 block"
-                role="img"
-                aria-label={b.title}
-              >
-                {b.icon}
-              </span>
+              <div className="mb-5">
+                <BlessingIcon type={b.iconType} />
+              </div>
               <h3 className="text-xl font-bold text-teal-dark mb-3">
                 {b.title}
               </h3>
