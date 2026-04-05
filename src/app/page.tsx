@@ -58,7 +58,7 @@ function Navbar() {
 function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-light/40 via-white to-teal-light/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-light/60 via-white to-teal-light/25" />
 
       <ParticleSymbol className="absolute inset-0 w-full h-full opacity-[0.40] pointer-events-none" />
 
@@ -148,7 +148,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="py-20 md:py-28 bg-teal-light/30">
+    <section id="how-it-works" className="py-20 md:py-28 bg-teal-light/50">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-20">
           <p className="text-teal font-semibold text-sm uppercase tracking-widest mb-4">
@@ -251,18 +251,19 @@ function BlessingIcon({ type }: { type: string }) {
     case "peace":
       return (
         <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9Z" />
-          <path d="M12 3v18" />
-          <path d="m12 12-6.5 6.5" />
-          <path d="m12 12 6.5 6.5" />
+          <path d="M16 7c.5-1.5 1.5-3 3-3 2 0 3 1.5 3 3.5 0 3.5-6 7.5-10 11C8 15 2 11 2 7.5 2 5.5 3 4 5 4c1.5 0 2.5 1.5 3 3" />
+          <path d="M8 7c1-2 2.5-4 4-4s3 2 4 4" />
+          <path d="M9 18l-1.5 2" />
+          <path d="M15 18l1.5 2" />
+          <path d="M12 12c0-2-1-4-1-4" />
+          <path d="M12 12c0-2 1-4 1-4" />
+          <path d="M12 12v6" />
         </svg>
       );
     case "health":
       return (
         <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22c-4-3-8-6.58-8-10.5a5.5 5.5 0 0 1 11 0 5.5 5.5 0 0 1 11 0c0 3.92-4 7.5-8 10.5Z" />
-          <path d="M12 11v4" />
-          <path d="M10 13h4" />
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3.332.83-4.5 2.17C10.832 3.83 9.26 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
         </svg>
       );
     case "provision":
@@ -321,7 +322,7 @@ function Blessings() {
   ];
 
   return (
-    <section id="blessings" className="py-20 md:py-28 bg-teal-light/30">
+    <section id="blessings" className="py-20 md:py-28 bg-teal-light/50">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-20">
           <p className="text-teal font-semibold text-sm uppercase tracking-widest mb-4">
@@ -365,16 +366,7 @@ function JoinCTA() {
       id="join"
       className="py-20 md:py-28 bg-teal-dark relative overflow-hidden"
     >
-      <div className="absolute top-0 right-0 opacity-5 pointer-events-none">
-        <Image
-          src="/assets/symbol.svg"
-          alt=""
-          width={500}
-          height={500}
-          className="w-[400px] h-auto translate-x-1/4 -translate-y-1/4"
-          aria-hidden="true"
-        />
-      </div>
+      <ParticleSymbol className="absolute inset-0 w-full h-full opacity-[0.15] pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
@@ -400,18 +392,8 @@ function JoinCTA() {
 
 function Footer() {
   return (
-    <footer className="py-12 bg-teal-dark border-t border-white/10 relative overflow-hidden">
-      <div className="absolute bottom-0 right-0 opacity-[0.06] pointer-events-none translate-x-1/4 translate-y-1/4">
-        <Image
-          src="/assets/symbol.svg"
-          alt=""
-          width={300}
-          height={300}
-          className="w-[250px] h-auto"
-          aria-hidden="true"
-        />
-      </div>
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+    <footer className="py-12 bg-teal-dark border-t border-white/10">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <Image
             src="/assets/logo-dark.svg"
