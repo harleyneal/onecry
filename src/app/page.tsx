@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ParticleSymbol from "./components/ParticleSymbol";
 
 function Navbar() {
   return (
@@ -10,7 +11,7 @@ function Navbar() {
             alt="OneCry Pensacola"
             width={180}
             height={40}
-            className="h-9 w-auto"
+            className="h-11 w-auto"
             priority
           />
         </a>
@@ -59,15 +60,8 @@ function Hero() {
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-teal-light/40 via-white to-teal-light/20" />
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.04] pointer-events-none">
-        <Image
-          src="/assets/symbol.svg"
-          alt=""
-          width={800}
-          height={800}
-          className="w-[600px] h-auto"
-          aria-hidden="true"
-        />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.08] pointer-events-none">
+        <ParticleSymbol width={600} height={600} />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -110,7 +104,7 @@ function Hero() {
 
 function Mission() {
   return (
-    <section id="mission" className="py-28 md:py-36 bg-white">
+    <section id="mission" className="py-20 md:py-28 bg-white">
       <div className="max-w-4xl mx-auto px-6">
         <p className="text-teal font-semibold text-sm uppercase tracking-widest mb-4">
           Our Mission
@@ -162,7 +156,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="py-28 md:py-36 bg-teal-light/30">
+    <section id="how-it-works" className="py-20 md:py-28 bg-teal-light/30">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-20">
           <p className="text-teal font-semibold text-sm uppercase tracking-widest mb-4">
@@ -200,7 +194,7 @@ function HowItWorks() {
 
 function WhyWePray() {
   return (
-    <section id="why-we-pray" className="py-28 md:py-36 bg-white">
+    <section id="why-we-pray" className="py-20 md:py-28 bg-white">
       <div className="max-w-4xl mx-auto px-6">
         <p className="text-teal font-semibold text-sm uppercase tracking-widest mb-4">
           Why We Pray
@@ -288,7 +282,7 @@ function Blessings() {
   ];
 
   return (
-    <section id="blessings" className="py-28 md:py-36 bg-teal-light/30">
+    <section id="blessings" className="py-20 md:py-28 bg-teal-light/30">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-20">
           <p className="text-teal font-semibold text-sm uppercase tracking-widest mb-4">
@@ -334,7 +328,7 @@ function JoinCTA() {
   return (
     <section
       id="join"
-      className="py-28 md:py-36 bg-teal-dark relative overflow-hidden"
+      className="py-20 md:py-28 bg-teal-dark relative overflow-hidden"
     >
       <div className="absolute top-0 right-0 opacity-5 pointer-events-none">
         <Image
@@ -371,8 +365,18 @@ function JoinCTA() {
 
 function Footer() {
   return (
-    <footer className="py-12 bg-teal-dark border-t border-white/10">
-      <div className="max-w-6xl mx-auto px-6">
+    <footer className="py-12 bg-teal-dark border-t border-white/10 relative overflow-hidden">
+      <div className="absolute bottom-0 right-0 opacity-[0.06] pointer-events-none translate-x-1/4 translate-y-1/4">
+        <Image
+          src="/assets/symbol.svg"
+          alt=""
+          width={300}
+          height={300}
+          className="w-[250px] h-auto"
+          aria-hidden="true"
+        />
+      </div>
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <Image
             src="/assets/logo-dark.svg"
