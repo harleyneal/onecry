@@ -23,7 +23,7 @@ function Navbar() {
             href="#how-it-works"
             className="hover:text-teal-dark transition-colors"
           >
-            How It Works
+            The Vision
           </a>
           <a
             href="#why-we-pray"
@@ -155,7 +155,7 @@ function HowItWorks() {
             The Vision
           </p>
           <h2 className="text-3xl md:text-5xl font-bold text-teal-dark leading-tight">
-            How it works
+            The Vision
           </h2>
         </div>
         <div className="grid md:grid-cols-3 gap-12 md:gap-8">
@@ -249,10 +249,10 @@ function BlessingIcon({ type }: { type: string }) {
   const cls = "w-10 h-10 text-teal";
   switch (type) {
     case "peace":
-      // Classic dove of peace silhouette
+      // Classic dove of peace — bird in flight with olive branch
       return (
-        <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12.5 2C10.5 2 9 3.2 9 5c0 .8.3 1.5.7 2L3 13.5c-.4.4-.5 1-.2 1.5s.9.7 1.4.5l3.3-1.3L6 17.5c-.2.5 0 1.1.4 1.4.3.2.6.3.9.3.2 0 .4 0 .5-.1l4.2-2.1 2 2c.3.3.7.4 1 .3.4-.1.7-.4.8-.8l.7-3.5 2.8 1c.1 0 .3.1.4.1.4 0 .7-.2.9-.5.3-.4.2-1-.1-1.3L17 11c.6-.8 1-1.8 1-2.8 0-.4 0-.7-.1-1.1l2.6-1.6c.5-.3.7-.9.5-1.4-.2-.5-.8-.8-1.3-.6l-2.8 1C15.8 3 14.3 2 12.5 2zm0 2c1.1 0 2 .7 2.3 1.7L12 7.5l-1-.6c-.3-.5-.5-1.2-.5-1.9 0-1 .9-1 2-1z" />
+        <svg className={cls} viewBox="0 0 64 64" fill="currentColor">
+          <path d="M58 8c-2-1-5.5-.5-8.5 1.5C46.5 11.5 44 15 43 18c-2-1-5-1.5-8-.5-3 1-5 3.5-6 6l-8.5-3c-.5-.2-1 0-1.2.4L16 28c-.3.5 0 1.1.5 1.3l8 3c-.5 2-.5 4 .2 6l-9 5.5c-.5.3-.6.8-.4 1.3l1.5 3c.2.5.8.7 1.3.5l9.5-4.5c1 1 2.2 1.8 3.4 2.4l-2 5c-.2.5 0 1 .4 1.3l3 1.5c.5.2 1.1 0 1.3-.5l2.5-5.5c1 .1 2 .1 3-.1l1 3c.1.4.5.7 1 .7h.2l3.2-.8c.5-.1.8-.6.7-1.1l-1.2-3.5c2.5-1.5 4.2-4 4.8-7l5.5-.5c.5 0 .9-.5.9-1v-3c0-.6-.4-1-.9-1.1l-5.5-.8c-.3-1.5-1-2.8-2-4l5-7c.3-.4.2-1-.2-1.3L49 16c1.5-3 3.5-5.5 6-6.5 1-.4.5-1.2-.5-1.5zM34 38c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z" />
         </svg>
       );
     case "health":
@@ -263,10 +263,12 @@ function BlessingIcon({ type }: { type: string }) {
         </svg>
       );
     case "provision":
-      // Solid open hands / offering
+      // Open hands receiving — symbol of God's provision
       return (
         <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z" />
+          <path d="M2.5 16.5c0-1.5.7-2.9 1.8-3.8L7 10.5c.5-.4 1.2-.5 1.8-.2l2.2 1.2 2.2-1.2c.6-.3 1.3-.2 1.8.2l2.7 2.2c1.1.9 1.8 2.3 1.8 3.8V18c0 1.7-1.3 3-3 3H5.5c-1.7 0-3-1.3-3-3v-1.5z" />
+          <path d="M12 3l-2.5 5h5L12 3z" />
+          <circle cx="12" cy="10" r="1.5" />
         </svg>
       );
     case "transformation":
@@ -401,7 +403,7 @@ function Footer() {
               href="#how-it-works"
               className="hover:text-white/80 transition-colors"
             >
-              How It Works
+              The Vision
             </a>
             <a
               href="#why-we-pray"
