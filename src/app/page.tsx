@@ -60,7 +60,7 @@ function Hero() {
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-teal-light/40 via-white to-teal-light/20" />
 
-      <ParticleSymbol className="absolute inset-0 w-full h-full opacity-[0.25] pointer-events-none" />
+      <ParticleSymbol className="absolute inset-0 w-full h-full opacity-[0.40] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <div className="mb-8">
