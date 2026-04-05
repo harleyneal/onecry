@@ -151,9 +151,6 @@ function HowItWorks() {
     <section id="how-it-works" className="py-20 md:py-28 bg-teal-light/50">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-20">
-          <p className="text-teal font-semibold text-sm uppercase tracking-widest mb-4">
-            How It Works
-          </p>
           <h2 className="text-3xl md:text-5xl font-bold text-teal-dark leading-tight">
             The Vision
           </h2>
