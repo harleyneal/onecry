@@ -60,17 +60,14 @@ function Hero() {
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-teal-light/60 via-white/80 to-teal-light/25" />
 
-      <div className="absolute inset-0 z-[1] flex items-start justify-center pointer-events-none">
-        <Image
-          src="/assets/pensacola.webp"
-          alt=""
-          width={1200}
-          height={800}
-          className="object-cover object-top opacity-[0.25] w-full h-full max-w-[1400px] mt-16"
-          priority
-          aria-hidden="true"
-        />
-      </div>
+      <Image
+        src="/assets/pensacola.webp"
+        alt=""
+        fill
+        className="absolute inset-0 z-[1] object-cover object-top opacity-[0.25] pointer-events-none"
+        priority
+        aria-hidden="true"
+      />
 
       <ParticleSymbol className="absolute inset-0 z-[2] w-full h-full opacity-[0.40] pointer-events-none" />
 
