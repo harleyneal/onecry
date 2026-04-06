@@ -28,3 +28,13 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+.hero-bg-image {
+  object-position: calc(100% + 100px) top;
+}
+
+@media (min-width: 768px) {
+  .hero-bg-image {
+    object-position: right top;
+  }
+}

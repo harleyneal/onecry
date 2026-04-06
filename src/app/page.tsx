@@ -3,7 +3,7 @@ import ParticleSymbol from "./components/ParticleSymbol";
 
 function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-teal-light">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-teal-light shadow-[0_4px_12px_-2px_rgba(0,128,128,0.15)]">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3">
           <Image
@@ -64,7 +64,7 @@ function Hero() {
         src="/assets/pensacola.webp"
         alt=""
         fill
-        className="absolute inset-0 z-[1] object-cover object-right-top opacity-[0.25] pointer-events-none"
+        className="absolute inset-0 z-[1] object-cover opacity-[0.25] pointer-events-none hero-bg-image"
         priority
         aria-hidden="true"
       />
