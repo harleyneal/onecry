@@ -58,9 +58,21 @@ function Navbar() {
 function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-light/60 via-white to-teal-light/25" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-teal-light/60 via-white/80 to-teal-light/25" />
 
-      <ParticleSymbol className="absolute inset-0 w-full h-full opacity-[0.40] pointer-events-none" />
+      <div className="absolute inset-0 z-[1] flex items-start justify-center pointer-events-none">
+        <Image
+          src="/assets/pensacola.webp"
+          alt=""
+          width={1200}
+          height={800}
+          className="object-cover object-top opacity-[0.25] w-full h-full max-w-[1400px] mt-16"
+          priority
+          aria-hidden="true"
+        />
+      </div>
+
+      <ParticleSymbol className="absolute inset-0 z-[2] w-full h-full opacity-[0.40] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <div className="mb-8">
