@@ -6,9 +6,13 @@ export const metadata: Metadata = {
   description:
     "Uniting churches across Pensacola for 24/7/365 prayer. Join us in covering our city in night and day prayer throughout Escambia and Santa Rosa Counties.",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
     apple: "/apple-touch-icon.png",
   },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "OneCry Pensacola | 24/7/365 Prayer",
     description:

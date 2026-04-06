@@ -76,9 +76,9 @@ function Hero() {
           <Image
             src="/assets/symbol.svg"
             alt="OneCry flame"
-            width={80}
-            height={120}
-            className="mx-auto h-32 w-auto mb-6"
+            width={100}
+            height={150}
+            className="mx-auto h-40 w-auto mb-6 opacity-40"
           />
         </div>
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-teal-dark mb-6 leading-[1.1]">
