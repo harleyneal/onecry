@@ -64,7 +64,7 @@ function Hero() {
         src="/assets/pensacola.webp"
         alt=""
         fill
-        className="absolute inset-0 z-[1] object-cover object-top opacity-[0.25] pointer-events-none"
+        className="absolute inset-0 z-[1] object-cover object-right-top opacity-[0.25] pointer-events-none"
         priority
         aria-hidden="true"
       />
